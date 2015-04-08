@@ -11,7 +11,9 @@
     "url": "https://github.com/ChrisTheBaron/node-json-math.git"
   },
   "keywords": [
-    "math"
+    "math",
+    "json",
+    "maths"
   ],
   "author": "Chris Taylor",
   "license": "MIT",
