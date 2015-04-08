@@ -1,24 +1,31 @@
 {
-  "name": "json-math",
-  "version": "0.1.0",
-  "description": "Package for describing mathmatical operations in JSON",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ChrisTheBaron/node-json-math.git"
-  },
-  "keywords": [
-    "math",
-    "json",
-    "maths"
-  ],
-  "author": "Chris Taylor",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ChrisTheBaron/node-json-math/issues"
-  },
-  "homepage": "https://github.com/ChrisTheBaron/node-json-math"
+	"name": "json-math",
+	"version": "0.1.0",
+	"description": "Package for describing mathmatical operations in JSON",
+	"main": "index.js",
+	"scripts": {
+		"test": "mocha spec/**/*-spec.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ChrisTheBaron/node-json-math.git"
+	},
+	"keywords": [
+		"math",
+		"json",
+		"maths"
+	],
+	"author": "Chris Taylor",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ChrisTheBaron/node-json-math/issues"
+	},
+	"homepage": "https://github.com/ChrisTheBaron/node-json-math",
+	"devDependencies": {
+		"chai": "^2.1.2",
+		"chai-as-promised": "^4.3.0",
+		"mocha": "^2.2.1",
+		"sinon": "^1.14.1",
+		"sinon-chai": "^2.7.0"
+	}
 }

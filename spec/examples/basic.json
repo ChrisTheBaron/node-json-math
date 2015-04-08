@@ -1,0 +1,30 @@
+{
+	"a": {
+		"operation": "+",
+		"variables": [
+			2,
+			2
+		]
+	},
+	"b": {
+		"operation": "-",
+		"variables": [
+			5,
+			1
+		]
+	},
+	"c": {
+		"operation": "*",
+		"variables": [
+			2,
+			2
+		]
+	},
+	"d": {
+		"operation": "/",
+		"variables": [
+			8,
+			2
+		]
+	}
+}
