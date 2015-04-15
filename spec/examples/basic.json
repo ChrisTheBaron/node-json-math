@@ -26,5 +26,20 @@
 			8,
 			2
 		]
+	},
+	"e": {
+		"operation": "^",
+		"variables": [
+			2,
+			2
+		]
+	},
+	"f": {
+		"operation": "+",
+		"variables": [
+			2,
+			1,
+			1
+		]
 	}
 }

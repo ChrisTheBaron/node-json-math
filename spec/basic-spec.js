@@ -34,13 +34,13 @@ describe('Basic', function () {
 
 	describe('it doing basic maths', function () {
 
-		it('should be able to do + - * /', function () {
+		it('should be able to do + - * / ^', function () {
 
 			var math = new JSONMath();
 
 			var result = math.execute(basic);
 
-			assert.deepEqual(result, {a: 4, b: 4, c: 4, d: 4});
+			assert.deepEqual(result, {a: 4, b: 4, c: 4, d: 4, e: 4, f: 4});
 
 		});
 

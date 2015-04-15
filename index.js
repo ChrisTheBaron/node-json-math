@@ -119,6 +119,11 @@ JSONMath.prototype._calculate = function (operation) {
 				return a / b
 			}
 			break;
+		case "^":
+			func = function (a, b) {
+				return Math.pow(a, b)
+			}
+			break;
 		default:
 			if (operation.constructor === Number) {
 				return operation;
