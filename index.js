@@ -8,21 +8,24 @@
  */
 var JSONMath = module.exports = function (options) {
 
-	options = options || {};
+	this._options = options || {};
 
-	this.strict = options.strict || true;
+	this._options.strict = this._options.strict || false;
 
-	this.variables = {};
+	this._variables = this._options.variables || {};
 
 };
 
 /**
  * Executes one or more mathmatical operations on a set of variables
  * @param {Array|Object} operations
- * @returns {Object|null}
+ * @param {Object} temporaryVariables
+ * @returns {Object}
  * @throws Error
  */
-JSONMath.prototype.execute = function (operations) {
+JSONMath.prototype.execute = function (operations, temporaryVariables) {
+
+	this._temporaryVariables = temporaryVariables || {};
 
 	switch (operations.constructor) {
 
@@ -33,10 +36,10 @@ JSONMath.prototype.execute = function (operations) {
 			return this._executeObject(operations);
 			break;
 		default:
-			if (this.strict) {
+			if (this._options.strict) {
 				throw new Error("Invalid call to JSONMath#execute with: " + JSON.stringify(operations));
 			}
-			return null;
+			return {};
 
 	}
 
@@ -56,7 +59,7 @@ JSONMath.prototype._executeArray = function (operations) {
 
 	}.bind(this));
 
-	return this.variables;
+	return this._variables;
 
 };
 
@@ -84,12 +87,12 @@ JSONMath.prototype._executeObject = function (operation) {
 	for (var variable in newVariables) {
 		if (newVariables.hasOwnProperty(variable)) {
 
-			this.variables[variable] = newVariables[variable];
+			this._variables[variable] = newVariables[variable];
 
 		}
 	}
 
-	return this.variables;
+	return this._variables;
 
 };
 
@@ -128,7 +131,7 @@ JSONMath.prototype._calculate = function (operation) {
 			if (operation.constructor === Number) {
 				return operation;
 			} else if (operation.constructor === String) {
-				return this.variables[operation];
+				return this._getVariable(operation);
 			}
 			throw new Error("Invalid operation to perform: " + JSON.stringify(operation));
 			break;
@@ -145,7 +148,7 @@ JSONMath.prototype._calculate = function (operation) {
 			if (result.constructor === Object) {
 				result = this._calculate(result);
 			} else if (result.constructor === String) {
-				result = this.variables[result];
+				result = this._getVariable(result);
 			}
 
 		} else {
@@ -155,7 +158,7 @@ JSONMath.prototype._calculate = function (operation) {
 			if (sec.constructor === Object) {
 				sec = this._calculate(sec);
 			} else if (sec.constructor === String) {
-				sec = this.variables[sec];
+				sec = this._getVariable(sec);
 			}
 
 			result = func(result, sec);
@@ -165,5 +168,26 @@ JSONMath.prototype._calculate = function (operation) {
 	}
 
 	return result;
+
+};
+
+/**
+ * Gets a variable from allowed sources by name
+ * @param {String} name
+ * @returns {Number}
+ * @throws Error
+ * @private
+ */
+JSONMath.prototype._getVariable = function (name) {
+
+	if (this._temporaryVariables[name]) {
+		return this._temporaryVariables[name];
+	} else if (this._variables[name]) {
+		return this._variables[name];
+	} else if (this._options.strict) {
+		throw new Error("Variable '" + name + "' has not been initalised");
+	} else {
+		return 0;
+	}
 
 };
